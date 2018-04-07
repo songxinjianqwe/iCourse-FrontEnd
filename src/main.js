@@ -30,12 +30,13 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           // 返回 401 清除token信息并跳转到登录页面
-          Message.error('登录凭证过期，请重新登录')
+          Message.error('登录凭证过期或(用户)尚未通过邮箱验证或(机构)尚未被审批通过')
           localStorage.clear('loginResult')
           router.replace({
             path: '/',
             query: { redirect: router.currentRoute.fullPath }
           })
+         
         case 500:
           
       }

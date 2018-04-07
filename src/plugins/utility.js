@@ -51,12 +51,28 @@ exports.install = function (Vue, options) {
         Vue.prototype._isLogin = function () {
             return localStorage.getItem('loginResult') !== null
         },
-        Vue.prototype._isAdmin = function () {
+        Vue.prototype._isManager = function () {
             let loginResult = localStorage.getItem('loginResult')
             if (loginResult === null) {
                 return null
             } else {
-                return JSON.parse(loginResult).isAdmin
+                return JSON.parse(loginResult).role == 'manager'
             }
-        }
+        },
+        Vue.prototype._isInstitution = function () {
+            let loginResult = localStorage.getItem('loginResult')
+            if (loginResult === null) {
+                return null
+            } else {
+                return JSON.parse(loginResult).role == 'institution'
+            }
+        },
+        Vue.prototype._isStudent = function () {
+            let loginResult = localStorage.getItem('loginResult')
+            if (loginResult === null) {
+                return null
+            } else {
+                return JSON.parse(loginResult).role == 'student'
+            }
+        }        
 };

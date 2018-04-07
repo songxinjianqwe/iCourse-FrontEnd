@@ -1,10 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import IndexPage from '@/pages/IndexPage'
+import LoginPage from '@/pages/LoginPage'
+import EndpointPage from '@/pages/EndpointPage'
 import Error403Page from '@/pages/error-pages/403'
 import Error404Page from '@/pages/error-pages/404'
 
+import StudentIndex from '@/components/student/StudentIndex'
+import InstitutionIndex from '@/components/institution/InstitutionIndex'
+import ManagerIndex from '@/components/manager/ManagerIndex'
+
+import StudentRegisterPage from '@/pages/StudentRegisterPage'
+import RegisterEmailValidation from '@/components/student/RegisterEmailValidation'
+import InstitutionRegisterPage from '@/pages/InstitutionRegisterPage'
+
+import StudentInfo from '@/components/student/sub/StudentInfo'
+import CourseMarket from '@/components/student/sub/CourseMarket'
+import StudentOrder from '@/components/student/sub/StudentOrder'
+import StudentAccount from '@/components/student/sub/StudentAccount'
+
 import { Message } from 'element-ui'
+
 Vue.use(Router)
 // main.js引入了VueRouter，所有的页面路由都写到router/index.js这个文件里
 // 在创建的 router 对象中，如果不配置 mode，就会使用默认的 hash 模式，该模式下会将路径格式化为 #! 开头。
@@ -13,7 +28,67 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: IndexPage,
+      component: LoginPage,
+    },
+    {
+      path: '/endpoint',
+      component: EndpointPage,
+      children: [
+        {
+          path: 'students/:id',
+          component: StudentIndex,
+          meta: {
+            requiresAuth: true,
+            requiresMySelf: true
+          },
+          children:[
+            {
+              path: 'info',
+              component: StudentInfo
+            },
+            {
+              path: 'course_market',
+              component: CourseMarket
+            },
+            {
+              path: 'orders',
+              component: StudentOrder
+            },
+            {
+              path: 'account',
+              component: StudentAccount
+            }
+          ]
+        },
+        {
+          path: 'institutions/:id',
+          component: InstitutionIndex,
+          meta: {
+            requiresAuth: true,
+            requiresMySelf: true
+          }
+        }, 
+        {
+          path: 'managers/:id',
+          component: ManagerIndex,
+          meta: {
+            requiresAuth: true,
+            requiresMySelf: true
+          }
+        },
+      ]
+    },
+    {
+      path: '/register/student',
+      component: StudentRegisterPage,
+    },
+    {
+      path: '/register/institution',
+      component: InstitutionRegisterPage,
+    },
+    {
+      path: '/register/validate/:activationId/:activationCode',
+      component : RegisterEmailValidation
     },
     {
       path: '/error/403',
