@@ -16,7 +16,15 @@ import InstitutionRegisterPage from '@/pages/InstitutionRegisterPage'
 import StudentInfo from '@/components/student/sub/StudentInfo'
 import CourseMarket from '@/components/student/sub/CourseMarket'
 import StudentOrder from '@/components/student/sub/StudentOrder'
-import StudentAccount from '@/components/student/sub/StudentAccount'
+import Account from '@/components/account/Account'
+import StudentStudyRecord from '@/components/student/sub/StudentStudyRecord'
+
+
+import InstitutionCourse from '@/components/institution/sub/InstitutionCourse'
+import InstitutionInfo from '@/components/institution/sub/InstitutionInfo'
+import InstitutionOrder from '@/components/institution/sub/InstitutionOrder'
+import InstitutionStudyRecord from '@/components/institution/sub/InstitutionStudyRecord'
+
 
 import { Message } from 'element-ui'
 
@@ -56,7 +64,11 @@ const router = new Router({
             },
             {
               path: 'account',
-              component: StudentAccount
+              component: Account
+            },
+            {
+              path: 'courses',
+              component: StudentStudyRecord
             }
           ]
         },
@@ -66,7 +78,29 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             requiresMySelf: true
-          }
+          },
+          children:[
+            {
+              path: 'courses',
+              component: InstitutionCourse
+            },
+            {
+              path: 'info',
+              component: InstitutionInfo
+            },
+            {
+              path: 'orders',
+              component: InstitutionOrder
+            },
+            {
+              path: 'students',
+              component: InstitutionStudyRecord
+            },
+            {
+              path: 'account',
+              component: Account
+            },
+          ]
         }, 
         {
           path: 'managers/:id',
@@ -106,6 +140,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // 如果没有登录
     if (localStorage.getItem('loginResult') === null) {
+      Message.error('尚未登录，转至登录页面')
       next({
         path: '/',
         // to.fullPath表示把当前路由信息传递过去方便登录后跳转回

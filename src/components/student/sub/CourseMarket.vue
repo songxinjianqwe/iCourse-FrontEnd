@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>课程广场</h1>
-    <course v-on:classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
+    <course @classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="coursePage">
     </el-pagination>
 
@@ -64,6 +64,7 @@ export default {
       this.placeOrderLoading = true
       let order = {
         classDO: { id: this.classDO.id },
+        student: { id: this._id() },
         discount: this.discount,
         price: this.discount * this.classDO.price,
         payType: '线上支付'

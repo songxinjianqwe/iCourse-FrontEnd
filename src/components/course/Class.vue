@@ -4,7 +4,7 @@
     <h3>{{classDO.price}}元</h3>
     <h3>限额:{{classDO.threshold}}</h3>
     <h3>已选:{{classDO.currentCount}}</h3>
-    <el-button :disabled="classDO.currentCount == classDO.threshold" @click="choose">选课</el-button>
+    <el-button v-if="_isStudent()" :disabled="classDO.currentCount == classDO.threshold" @click="choose">选课</el-button>
   </div>
 </template>
 

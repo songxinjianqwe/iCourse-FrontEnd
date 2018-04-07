@@ -17,6 +17,7 @@
 
     <div v-show="isBound">
       您已经绑定了支付账号
+      <h3>当前余额为 {{balance}} 元</h3>
     </div>
   </div>
 </template>
@@ -30,7 +31,8 @@ export default {
       account: {
         alipayUsername: '',
         paymentPassword: ''
-      }
+      },
+      balance:0
     }
   },
   methods: {
@@ -41,6 +43,7 @@ export default {
         .then(response => {
           this.loading = false
           this.isBound = true
+          this.balance = response.data.balance
           this.$message({
             message: '恭喜你，支付账号绑定成功',
             type: 'success'
@@ -56,7 +59,8 @@ export default {
       this.axios
         .get('/account/bind')
         .then(response => {
-          this.isBound = response.data
+          this.isBound = response.data.isBound
+          this.balance = response.data.balance
         })
         .catch(error => {
           throw error

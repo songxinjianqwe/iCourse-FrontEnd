@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>我的订单</h1>
-    <order-table v-loading="loading"  :orders="orders" @orderChanged="onOrderChanged" ></order-table>
+    <h1>订单管理</h1>
+    <order-table v-loading="loading" :orders="orders" ></order-table>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="orderPage">
     </el-pagination>
   </div>
@@ -22,7 +22,7 @@ export default {
     fetchOrders() {
       this.loading = true
       let condition = {
-        studentId: this._id(),
+        institutionId: this._id(),
         pageNum: this.orderPage,
         pageSize: this.DEFAULT_PAGE_SIZE
       }

@@ -6,7 +6,7 @@
       开课时间: {{course.startTime}}
     </h3>
     <div>{{course.description}}</div>
-    <class v-on:classChosen="onClassChosen" v-for="classDO in course.classes"  :key="classDO.id" :classDO="classDO"></class>
+    <class @classChosen="onClassChosen" v-for="classDO in course.classes"  :key="classDO.id" :classDO="classDO"></class>
   </div>
 </template>
 

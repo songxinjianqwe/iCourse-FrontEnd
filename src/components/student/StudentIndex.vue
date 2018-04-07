@@ -47,6 +47,6 @@ export default {
 }
 .right-block {
   float: left;
-  margin-left: 100px;
+  margin-left: 50px;
 }
 </style>

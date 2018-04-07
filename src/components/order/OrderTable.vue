@@ -1,13 +1,15 @@
 <template>
   <div>
     <el-table :data="orders" stripe highlight-current-row>
-      <el-table-column prop="id" label="订单号" width="50">
+      <el-table-column prop="id" label="订单号" width="100">
       </el-table-column>
       <el-table-column prop="classDO.course.name" label="课程名" width="100">
       </el-table-column>
       <el-table-column prop="classDO.name" label="班级名" width="100">
       </el-table-column>
-      <el-table-column prop="institution.username" label="开设机构" width="100">
+      <el-table-column v-if="_isStudent()" prop="institution.username" label="开设机构" width="100">
+      </el-table-column>
+      <el-table-column v-if="_isInstitution()" prop="student.username" label="学员名" width="100">
       </el-table-column>
       <el-table-column prop="placeTime" label="下单时间" width="100">
       </el-table-column>
@@ -19,18 +21,17 @@
       </el-table-column>
       <el-table-column prop="status" label="订单状态" width="100">
       </el-table-column>
-      <el-table-column label="操作" width="100">
+      <el-table-column v-if="_isStudent()" label="操作" width="100">
         <template slot-scope="scope">
           <el-button v-show="scope.row.status == '未付款'" @click="pay(scope.row)">支付</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="100">
+      <el-table-column v-if="_isStudent()" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button v-show="scope.row.status == '未付款' || scope.row.status == '已付款'" @click="cancel(scope.row)">取消</el-button>
+          <el-button v-show="scope.row.status == '未付款' || scope.row.status == '已付款'" @click="cancelOrder(scope.row)">取消</el-button>
         </template>
       </el-table-column>
     </el-table>
-
     <el-dialog title="支付" :visible.sync="payDialogVisible" width="30%">
       <span>请输入支付账号和密码</span>
       <el-form v-loading="loading" :model="account" ref="account" label-width="100px">
@@ -79,7 +80,8 @@ export default {
             message: '支付成功',
             type: 'success'
           })
-          this.$emit('orderChanged', this.order)
+          console.log('支付结果', response.data)
+          this.$emit('orderChanged', response.data)
         })
         .catch(error => {
           this.payDialogVisible = false
@@ -94,7 +96,38 @@ export default {
         paymentPassword: ''
       }
     },
-    cancelOrder(order) {}
+    cancelOrder(order) {
+      if (order.status == '未付款') {
+        this.doCancelOrder(order)
+        return
+      }
+      let waringingString = ''
+      if (
+        Date.parse(new Date(order.classDO.course.startTime)) <=
+        Date.parse(new Date())
+      ) {
+        waringingString =
+          '注意，该订单对应课程已经开课，如果取消，您将无法得到任何退款'
+      } else {
+        waringingString =
+          '注意，该订单对应课程尚未开课，如果取消，您只能得到一半退款'
+      }
+      this.$confirm(waringingString, '取消订单', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.doCancelOrder(order)
+      })
+    },
+    doCancelOrder(order) {
+      this.axios
+        .put(`/orders/cancel/${order.id}`)
+        .then(response => {
+          this.$emit('orderChanged', response.data)
+        })
+        .catch(error => {})
+    }
   }
 }
 </script>
