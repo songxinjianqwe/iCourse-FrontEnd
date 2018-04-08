@@ -23,8 +23,13 @@ import StudentStudyRecord from '@/components/student/sub/StudentStudyRecord'
 import InstitutionCourse from '@/components/institution/sub/InstitutionCourse'
 import InstitutionInfo from '@/components/institution/sub/InstitutionInfo'
 import InstitutionOrder from '@/components/institution/sub/InstitutionOrder'
-import InstitutionStudyRecord from '@/components/institution/sub/InstitutionStudyRecord'
+import InstitutionSettlement from '@/components/institution/sub/InstitutionSettlement'
 
+import ManagerApproval from '@/components/manager/sub/ManagerApproval'
+import ManagerInstitution from '@/components/manager/sub/ManagerInstitution'
+import ManagerOrder from '@/components/manager/sub/ManagerOrder'
+import ManagerSettlement from '@/components/manager/sub/ManagerSettlement'
+import ManagerStudent from '@/components/manager/sub/ManagerStudent'
 
 import { Message } from 'element-ui'
 
@@ -49,7 +54,7 @@ const router = new Router({
             requiresAuth: true,
             requiresMySelf: true
           },
-          children:[
+          children: [
             {
               path: 'info',
               component: StudentInfo
@@ -79,7 +84,7 @@ const router = new Router({
             requiresAuth: true,
             requiresMySelf: true
           },
-          children:[
+          children: [
             {
               path: 'courses',
               component: InstitutionCourse
@@ -93,22 +98,48 @@ const router = new Router({
               component: InstitutionOrder
             },
             {
-              path: 'students',
-              component: InstitutionStudyRecord
-            },
-            {
               path: 'account',
               component: Account
             },
+            {
+              path: 'settlement',
+              component: InstitutionSettlement
+            }
           ]
-        }, 
+        },
         {
           path: 'managers/:id',
           component: ManagerIndex,
           meta: {
             requiresAuth: true,
             requiresMySelf: true
-          }
+          },
+          children: [
+            {
+              path: 'approval',
+              component: ManagerApproval
+            },
+            {
+              path: 'orders',
+              component: ManagerOrder
+            },
+            {
+              path: 'account',
+              component: Account
+            },
+            {
+              path: 'settlement',
+              component: ManagerSettlement
+            },
+            {
+              path: 'students',
+              component: ManagerStudent
+            },
+            {
+              path: 'institutions',
+              component: ManagerInstitution
+            }
+          ]
         },
       ]
     },
@@ -122,7 +153,7 @@ const router = new Router({
     },
     {
       path: '/register/validate/:activationId/:activationCode',
-      component : RegisterEmailValidation
+      component: RegisterEmailValidation
     },
     {
       path: '/error/403',

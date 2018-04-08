@@ -15,9 +15,9 @@
                     <i class="el-icon-tickets"></i>
                     <span slot="title">订单管理</span>
                 </el-menu-item>
-                <el-menu-item :index="`/endpoint/institutions/${this._id()}/students`">
-                    <i class="el-icon-tickets"></i>
-                    <span slot="title">学员管理</span>
+                <el-menu-item :index="`/endpoint/institutions/${this._id()}/settlement`">
+                    <i class="el-icon-message"></i>
+                    <span slot="title">结算管理</span>
                 </el-menu-item>
                 <el-menu-item :index="`/endpoint/institutions/${this._id()}/account`">
                     <i class="el-icon-setting"></i>

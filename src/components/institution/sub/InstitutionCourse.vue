@@ -9,6 +9,7 @@
     <course v-for="course in courses" :key="course.id" :course="course"></course>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="coursePage">
     </el-pagination>
+
   </div>
 </template>
 
@@ -22,7 +23,6 @@ export default {
       coursePage: 1,
       courses: [],
       totalPages: 1,
-      loading: false,
       newCourseDialogVisible: false
     }
   },

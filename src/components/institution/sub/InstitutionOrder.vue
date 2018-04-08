@@ -1,6 +1,10 @@
 <template>
   <div>
     <h1>订单管理</h1>
+    <el-button type="primary" @click="orderDialogVisible = true">添加线下学员</el-button>
+    <el-dialog title="添加线下学员订单" :visible.sync="orderDialogVisible" width="30%" :before-close="handleClose">
+      <order-place-form @order-place-success="onOrderPlaceSuccess" ref="orderPlaceForm"></order-place-form>
+    </el-dialog>
     <order-table v-loading="loading" :orders="orders" ></order-table>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="orderPage">
     </el-pagination>
@@ -8,6 +12,7 @@
 </template>
 
 <script>
+import OrderPlaceForm from '@/components/order/OrderPlaceForm'
 import OrderTable from '@/components/order/OrderTable'
 export default {
   data() {
@@ -15,7 +20,8 @@ export default {
       orderPage: 1,
       orders: [],
       loading: true,
-      totalPages: 1
+      totalPages: 1,
+      orderDialogVisible: false,
     }
   },
   methods: {
@@ -37,6 +43,14 @@ export default {
           this.loading = false
           throw error
         })
+    },
+    handleClose() {
+      this.$refs.orderPlaceForm.$emit('clearOrder')
+      this.orderDialogVisible = false
+    },
+    onOrderPlaceSuccess(){
+      this.orderDialogVisible = false
+      this.fetchOrders()
     },
     handlePageChanged(newPageNum) {
       this.orderPage = newPageNum
@@ -60,7 +74,8 @@ export default {
     })
   },
   components: {
-    OrderTable
+    OrderTable,
+    OrderPlaceForm
   }
 }
 </script>

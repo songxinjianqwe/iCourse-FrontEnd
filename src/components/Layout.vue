@@ -70,7 +70,7 @@ export default {
       setTimeout(() => {
         this.$router.push('/')
         window.location.reload()
-      }, 2000)
+      }, 500)
     }
   }
 }
