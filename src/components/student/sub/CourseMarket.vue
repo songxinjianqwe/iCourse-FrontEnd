@@ -34,7 +34,7 @@ export default {
       this.loading = true
       let params = {
         pageNum: this.coursePage,
-        pageSize: this.DEFAULT_PAGE_SIZE
+        pageSize: 6
       }
       this.axios
         .get(`/courses`, {

@@ -99,7 +99,7 @@ export default {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 100px;
   margin-bottom: 20px;
 }
 </style>

@@ -76,7 +76,7 @@ export default {
               this.$router.push(this.$route.query.redirect);
             }
             this.$router.push(
-              `/endpoint/${response.data.role + "s"}/${response.data.id}`
+              `/endpoint/${response.data.role + "s"}/${response.data.id}/info`
             );
           }, 500);
         })

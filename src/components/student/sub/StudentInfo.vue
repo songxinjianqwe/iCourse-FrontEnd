@@ -21,7 +21,7 @@
         {{student.consumptions}}
       </el-form-item>
       <el-form-item label="昵称" prop="regTime">
-        <el-input v-model="student.nickname"></el-input>
+        <el-input style="width:300px;" v-model="student.nickname"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="confirmUpdate">修改</el-button>
@@ -59,7 +59,9 @@ export default {
         type: 'warning'
       }).then(() => {
         this.onModify()
-      })
+      }).catch(() => {
+         this.fetchStudent();        
+      });
     },
     onModify() {
       console.log('待更新的表单数据')

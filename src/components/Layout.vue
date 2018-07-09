@@ -11,10 +11,10 @@
         <div class="header-nav">
           <!-- 导航条 -->
           <el-menu class="nav-menu" :default-active="$route.path" :router="true" mode="horizontal" background-color="#24292c" text-color="#999" active-text-color="#ffffff">
-            <el-menu-item index="/">首页</el-menu-item>
-            <el-menu-item v-if="_isStudent()" :index="`/endpoint/students/${this._id()}`">学生入口</el-menu-item>
-            <el-menu-item v-if="_isInstitution()" :index="`/endpoint/institutions/${this._id()}`">机构入口</el-menu-item>
-            <el-menu-item v-if="_isManager()" :index="`/endpoint/managers/${this._id()}`">经理入口</el-menu-item>
+            <el-menu-item v-if="!_isLogin()" index="/">首页</el-menu-item>
+            <el-menu-item v-if="_isStudent()" :index="`/endpoint/students/${this._id()}/info`">学生入口</el-menu-item>
+            <el-menu-item v-if="_isInstitution()" :index="`/endpoint/institutions/${this._id()}/info`">机构入口</el-menu-item>
+            <el-menu-item v-if="_isManager()" :index="`/endpoint/managers/${this._id()}/info`">经理入口</el-menu-item>
             <el-menu-item v-if="_isLogin()" index="" @click="logout">退出登录</el-menu-item>
           </el-menu>
         </div>

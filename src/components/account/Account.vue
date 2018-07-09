@@ -17,7 +17,7 @@
 
     <div v-show="isBound">
       您已经绑定了支付账号
-      <h3>当前余额为 {{balance}} 元</h3>
+      <h3>当前余额为 <el-tag>{{balance}}</el-tag> 元</h3>
     </div>
   </div>
 </template>
