@@ -1,14 +1,10 @@
 <template>
   <div class="classDO">
-    <div class="classText">
-      <h2 class="left">{{classDO.name}}</h2>
+    <div class="class-text">
+      <el-tag type="info">{{classDO.name}}</el-tag>
       <h3>{{classDO.price}}元</h3>
-      <h3>限额:{{classDO.threshold}}</h3>
-      <h3>已选:{{classDO.currentCount}}</h3>
-      <el-progress :text-inside="true" :stroke-width="18" :percentage="Math.round(100 * classDO.currentCount / classDO.threshold)"></el-progress>
-      <div class="choose-btn">
-        <el-button type="primary" v-if="_isStudent()" :disabled="classDO.currentCount == classDO.threshold" @click="choose">选课</el-button>
-      </div>
+      <p>限额:{{classDO.threshold}} 已选:{{classDO.currentCount}}</p>
+      <el-button type="primary" v-if="_isStudent()" :disabled="classDO.currentCount == classDO.threshold" @click="choose">选课</el-button>
       <el-button v-if="_isInstitution()" @click="studyRecordDialogVisible = true">学员管理</el-button>
     </div>
     <el-dialog title="学员管理" :visible.sync="studyRecordDialogVisible" width="80%">
@@ -82,20 +78,12 @@ export default {
 
 <style>
 .classDO {
-  border-style: solid;
-  border-width: 1px;
-  width:400px;
+  padding: 10px;
 }
-.classText{
-  text-align:center;
+.class-text{
+  text-align: center;
 }
-.left{
-  text-align:left;
-}
-.choose-btn{
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  text-align:right;
+.class-text > *:not(:first-child) {
+  margin: 8px 0 0 0;
 }
 </style>
