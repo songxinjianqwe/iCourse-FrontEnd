@@ -1,9 +1,11 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
+  <el-card :body-style="{ padding: '0px' }" class="card">
     <img :src="course.imageUrl" class="image">
-    <div style="padding: 14px;">
-      <span>{{course.name}}</span>
-      <el-tag style="margin-left: 12px;">{{course.type}}</el-tag>
+    <div class="content">
+      <div class="first-line">
+        <span class="title">{{course.name}}</span>
+        <el-tag style="margin-left: 12px;">{{course.type}}</el-tag>
+      </div>
       <br>
       <time class="time">开课时间: {{course.startTime}}</time>
       <div class="info">
@@ -37,12 +39,34 @@ export default {
 </script>
 
 <style>
+.card {
+  border-radius: 10px;
+}
+.content {
+  padding: 14px;
+}
+.title {
+  font-style: italic;
+  font-weight: bolder;
+}
+.first-line {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 .description {
   color: #a29a9a;
+  height: 200px;
+  overflow: auto;
 }
 .image {
   width: 100%;
   display: block;
+}
+.info {
+  display: flex;
+  flex-flow: column nowrap;
 }
 .info > * {
   margin: 8px 0 -8px 0;
@@ -50,6 +74,7 @@ export default {
   border-top: 1px solid #e1e1e1;
 }
 .class-container {
+  flex-grow: 2;
   display: flex;
   flex-flow: row wrap;
   padding: 0;
