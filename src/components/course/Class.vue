@@ -3,7 +3,7 @@
     <div class="class-text">
       <el-tag type="info">{{classDO.name}}</el-tag>
       <h3>{{classDO.price}}元</h3>
-      <p>限额:{{classDO.threshold}} 已选:{{classDO.currentCount}}</p>
+      <p style="font-size:12px;">限额:{{classDO.threshold}} 已选:{{classDO.currentCount}}</p>
       <el-button type="primary" v-if="_isStudent()" :disabled="classDO.currentCount == classDO.threshold" @click="choose">选课</el-button>
       <el-button v-if="_isInstitution()" @click="studyRecordDialogVisible = true">学员管理</el-button>
     </div>
