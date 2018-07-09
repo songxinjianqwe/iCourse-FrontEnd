@@ -82,13 +82,17 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #ededef;
+  background-image: url(../../static/image/background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 800px;
 }
 
 /* header */
 
 .app-header {
-  height: 82px;
+  height: 60px;
   width: 100%;
   background-color: #24292c;
 }
@@ -100,24 +104,19 @@ body {
   color: #ffffff;
 }
 .logo {
-  position: relative;
   float: left;
   width: 220px;
-  height: 44px;
 }
 .header-nav {
   float: left;
-  margin: 35px 0 0;
+  height: 100%;
 }
 .nav-menu {
   float: left;
+  display: flex;
+  flex-flow: row nowrap;
   position: relative;
-  z-index: 65;
   width: 670px;
-  height: 48px;
-  padding: 22px 5px 0 0;
-  margin: -36px 0 0;
-  text-align: left;
   border: 0px;
 }
 .nav-search {

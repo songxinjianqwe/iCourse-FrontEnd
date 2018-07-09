@@ -49,8 +49,13 @@ export default {
   width: 150px;
   text-align: left;
 }
+.left-block > h2 {
+  text-align: center;
+}
 .right-block {
   float: left;
   margin-left: 50px;
+  background: white;
+  width: 100%;
 }
 </style>

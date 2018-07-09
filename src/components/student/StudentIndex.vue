@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="left-block">
             <h2>{{this._username()}}</h2>
             <el-menu :default-active="$route.path" :router="true" background-color="#F3F3F3">
@@ -40,13 +40,23 @@ export default {
 </script>
 
 <style>
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
 .left-block {
-  float: left;
   width: 150px;
   text-align: left;
 }
+.left-block > h2 {
+  text-align: center;
+}
 .right-block {
-  float: left;
+  padding: 20px;
+  border-radius: 10px;
   margin-left: 50px;
+  background: white;
+  width: 100%;
 }
 </style>

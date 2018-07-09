@@ -1,7 +1,7 @@
 <template>
   <!-- 键盘监听回车键，按下时提交表单 -->
   <div class="login" @keydown.enter="submitForm">
-    <el-form v-if="!_isLogin()" :model="loginForm" ref="loginForm" label-width="100px">
+    <el-form v-if="!_isLogin()" :model="loginForm" ref="loginForm" label-width="100px" class="my-form">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="loginForm.username" size="tiny"></el-input>
       </el-form-item>
@@ -17,8 +17,10 @@
       <el-form-item class="item">
         <el-button type="primary" @click="submitForm">登录</el-button>
         <el-button @click="resetForm">重置</el-button>
-        <el-button @click="register('institution')">注册机构</el-button>
-        <el-button @click="register('student')">注册学生</el-button>
+      </el-form-item>
+      <el-form-item class="item">
+        <el-button type="text" class="text-link" @click="register('institution')">注册机构</el-button>
+        <el-button type="text" class="text-link" @click="register('student')">注册学生</el-button>
       </el-form-item>
     </el-form>
     <div v-if="_isLogin()">
@@ -33,60 +35,60 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: '',
-        userType: ''
+        username: "",
+        password: "",
+        userType: ""
       },
       userTypes: [
-        { label: '学生', value: 'STUDENT' },
-        { label: '机构', value: 'INSTITUTION' },
-        { label: '经理', value: 'MANAGER' }
+        { label: "学生", value: "STUDENT" },
+        { label: "机构", value: "INSTITUTION" },
+        { label: "经理", value: "MANAGER" }
       ]
-    }
+    };
   },
   methods: {
     register(type) {
-      this.$router.push(`/register/${type}`)
+      this.$router.push(`/register/${type}`);
     },
     submitForm() {
-      console.log(this.loginForm)
+      console.log(this.loginForm);
       this.axios
-        .post('/tokens', this.loginForm)
+        .post("/tokens", this.loginForm)
         .then(response => {
-          console.log('登录成功')
-          console.log(response.data)
+          console.log("登录成功");
+          console.log(response.data);
           //清空表单
-          this.resetForm()
+          this.resetForm();
           //发出成功提示
-          const h = this.$createElement
+          const h = this.$createElement;
           this.$notify({
-            title: '登录成功',
+            title: "登录成功",
             message: h(
-              'i',
-              { style: 'color: teal' },
-              '欢迎您，' + response.data.username
+              "i",
+              { style: "color: teal" },
+              "欢迎您，" + response.data.username
             )
-          })
-          localStorage.setItem('loginResult', JSON.stringify(response.data))
+          });
+          localStorage.setItem("loginResult", JSON.stringify(response.data));
           setTimeout(() => {
             //跳转回主页
-            if ('redirect' in this.$route.query) {
-              this.$router.push(this.$route.query.redirect)
+            if ("redirect" in this.$route.query) {
+              this.$router.push(this.$route.query.redirect);
             }
             this.$router.push(
-              `/endpoint/${response.data.role + 's'}/${response.data.id}`
-            )
-          }, 500)
+              `/endpoint/${response.data.role + "s"}/${response.data.id}`
+            );
+          }, 500);
         })
         .catch(error => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     resetForm() {
-      this.$refs['loginForm'].resetFields()
+      this.$refs["loginForm"].resetFields();
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -97,5 +99,17 @@ export default {
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.my-form {
+  background-color: rgba(159, 216, 226, 0.75);
+  padding: 20px;
+  padding-right: 102px;
+  border-radius: 10px;
+}
+.el-select {
+  width: 100%;
+}
+.text-link {
+  color: #2f6dad;
 }
 </style>
