@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>课程广场</h1>
-    <course class="course" @classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
+    <div class="course-container">
+      <course class="course" @classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
+    </div>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="coursePage">
     </el-pagination>
-
     <el-dialog v-loading="placeOrderLoading" title="确认订单" :visible.sync="orderConfirmDialogVisible" width="30%">
       <span>您享受的折扣为{{discount}},本笔订单的金额为{{discount * classDO.price}}</span>
       <span slot="footer" class="dialog-footer">
@@ -108,7 +109,13 @@ export default {
 </script>
 
 <style>
-.course{
-  margin-bottom: 20px;
+.course {
+  margin: 20px;
+  width: 30%;
+  max-width: 280px;
+}
+.course-container {
+  display: flex;
+  flex-flow: row wrap;
 }
 </style>
