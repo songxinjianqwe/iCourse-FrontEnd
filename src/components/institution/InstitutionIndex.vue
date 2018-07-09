@@ -40,8 +40,12 @@ export default {
 </script>
 
 <style>
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
 .left-block {
-  float: left;
   width: 150px;
   text-align: left;
 }
@@ -49,7 +53,8 @@ export default {
   text-align: center;
 }
 .right-block {
-  float: left;
+  padding: 20px;
+  border-radius: 10px;
   margin-left: 50px;
   background: white;
   width: 100%;
