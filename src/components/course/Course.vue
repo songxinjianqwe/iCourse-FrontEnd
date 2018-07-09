@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h3>
-      {{course.name}} 
-      <el-tag>{{course.type}}</el-tag> 
-      开课时间: {{course.startTime}}
-    </h3>
+    <div>
+      <h3 style="display:inline-block">{{course.name}}</h3>
+      <el-tag>{{course.type}}</el-tag>
+      <time class="time">开课时间: {{course.startTime}}</time>
+    </div>
+    <img height="200" width="400" :src="course.imageUrl"/>
     <div>{{course.description}}</div>
     <class @classChosen="onClassChosen" v-for="classDO in course.classes"  :key="classDO.id" :classDO="classDO"></class>
   </div>

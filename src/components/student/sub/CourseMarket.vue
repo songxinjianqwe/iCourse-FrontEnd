@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>课程广场</h1>
-    <course @classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
+    <course class="course" @classChosen="onClassChosen" v-for="course in courses" :key="course.id" :course="course"></course>
     <el-pagination style="text-align:center; margin-top:10px;" layout="prev, pager, next" :page-count="totalPages" @current-change="handlePageChanged" :current-page.sync="coursePage">
     </el-pagination>
 
@@ -108,5 +108,7 @@ export default {
 </script>
 
 <style>
-
+.course{
+  margin-bottom: 20px;
+}
 </style>
