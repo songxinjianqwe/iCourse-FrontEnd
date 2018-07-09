@@ -98,9 +98,10 @@ export default {
           this.$emit('orderChanged', response.data)
         })
         .catch(error => {
+          console.log('error',error.response)
           this.payDialogVisible = false
           this.loading = false
-          this.$message.error('支付失败')
+           this.$message.error(`支付失败,${error.response.data.fieldErrors[0].message}`)
         })
     },
     cancelPay() {

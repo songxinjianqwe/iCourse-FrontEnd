@@ -4,10 +4,10 @@
     <div v-show="!isBound">
       <el-form v-loading="loading" :model="account" ref="account" label-width="100px">
         <el-form-item label="用户名" prop="alipayUsername">
-          <el-input v-model="account.alipayUsername" size="tiny"></el-input>
+          <el-input style="width:300px;" v-model="account.alipayUsername" size="tiny"></el-input>
         </el-form-item>
         <el-form-item label="支付密码" prop="paymentPassword">
-          <el-input type="password" v-model="account.paymentPassword" auto-complete="off" size="tiny"></el-input>
+          <el-input style="width:300px;" type="password" v-model="account.paymentPassword" auto-complete="off" size="tiny"></el-input>
         </el-form-item>
         <el-form-item class="item">
           <el-button type="primary" :disabled="account.alipayUsername == '' || account.paymentPassword == ''" @click="bind">绑定</el-button>
@@ -17,7 +17,8 @@
 
     <div v-show="isBound">
       您已经绑定了支付账号
-      <h3>当前余额为 <el-tag>{{balance}}</el-tag> 元</h3>
+      <h3>当前余额为
+        <el-tag>{{balance}}</el-tag> 元</h3>
     </div>
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
         alipayUsername: '',
         paymentPassword: ''
       },
-      balance:0
+      balance: 0
     }
   },
   methods: {
@@ -48,7 +49,6 @@ export default {
             message: '恭喜你，支付账号绑定成功',
             type: 'success'
           })
-          
         })
         .catch(error => {
           this.loading = false
@@ -77,5 +77,4 @@ export default {
 </script>
 
 <style>
-
 </style>
