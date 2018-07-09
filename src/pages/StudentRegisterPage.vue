@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <el-form v-if="!send" :model="student" ref="student" label-width="100px">
+    <el-form v-if="!send" :model="student" ref="student" label-width="100px" class="my-form">
       <el-form-item label="用户名">
         <el-input v-model="student.username" size="tiny" @blur="onUsernameBlur"></el-input>
       </el-form-item>
@@ -95,11 +95,17 @@ export default {
 
 <style scoped>
 .register {
-  width: 30%;
+  width: 50%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
   margin-bottom: 20px;
+}
+.my-form {
+  background-color: rgba(159, 216, 226, 0.75);
+  padding: 20px;
+  padding-right: 102px;
+  border-radius: 10px;
 }
 </style>
