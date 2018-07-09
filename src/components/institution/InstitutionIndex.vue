@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="left-block">
             <h2>{{this._username()}}</h2>
             <el-menu :default-active="$route.path" :router="true" background-color="#F3F3F3">
